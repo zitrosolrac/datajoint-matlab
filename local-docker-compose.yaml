@@ -70,7 +70,7 @@ services:
     - MATLAB_USER
     - MATLAB_LICENSE
     - JUPYTER_PASSWORD=datajoint
-    - DISPLAY
+    - DISPLAY=host.docker.internal:0
     image: raphaelguzman/matlab:${MATLAB_VERSION}-GUI
     depends_on:
       fakeservices.datajoint.io:
@@ -130,7 +130,8 @@ services:
       - .:/src
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       ## Additional mounts may go here
-      # - ./notebook:/home/muser/notebooks
+      - ./notebook:/home/muser/notebooks
+      - ./:/home/muser/djmatlab
       # - ./matlab.prf:/tmp/matlab.prf
 networks:
   main:
